@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
+    public bool IsMoving = true;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -10,9 +12,7 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
-        // _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-
-        var direction = Random.Range(0, 4);
+        var direction = IsMoving ? Random.Range(0, 4) : 4;
 
         switch (direction)
         {

@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class PlayerShooting : NetworkBehaviour
 {
+    public bool CanShoot = true;
+    
     [SerializeField] private Projectile _projectile;
     [SerializeField] private AudioClip _spawnClip;
     [SerializeField] private float _projectileSpeed = 700;
@@ -24,6 +26,8 @@ public class PlayerShooting : NetworkBehaviour
 
     private void Update()
     {
+        if (!CanShoot) return;
+        
         if (!IsOwner && !SingleModeManager.Instance.isPlaying) return;
 
         if (GetComponent<Boss>())
