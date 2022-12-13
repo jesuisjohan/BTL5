@@ -1,4 +1,3 @@
-using Unity.Netcode;
 using UnityEngine;
 
 public class BossController : MonoBehaviour
@@ -12,6 +11,37 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         // _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
+        var direction = Random.Range(0, 4);
+
+        switch (direction)
+        {
+            case 0:
+            {
+                _input = new Vector3(0, 0, -1);
+                break;
+            }
+            case 1:
+            {
+                _input = new Vector3(0, 0, 1);
+                break;
+            }
+            case 2:
+            {
+                _input = new Vector3(-1, 0, 0);
+                break;
+            }
+            case 3:
+            {
+                _input = new Vector3(1, 0, 0);
+                break;
+            }
+            default:
+            {
+                _input = new Vector3(0, 0, 0);
+                break;
+            }
+        }
     }
 
     private void FixedUpdate()

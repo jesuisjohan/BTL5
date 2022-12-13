@@ -12,6 +12,11 @@ public class SingleModeManager : MonoBehaviour
     public Transform bossPrefab;
     public Transform playerSpawner;
     public Transform bossSpawner;
+    public Transform upBoundary;
+    public Transform downBoundary;
+    public Transform leftBoundary;
+    public Transform rightBoundary;
+    
     public Transform player { get; private set; }
     public Transform boss { get; private set; }
 
