@@ -1,17 +1,21 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
-    private void Awake() {
+public class PlayerController : MonoBehaviour
+{
+    private void Awake()
+    {
         _rb = GetComponent<Rigidbody>();
         _cam = Camera.main;
     }
 
-    private void Update() {
+    private void Update()
+    {
         _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         HandleMovement();
         HandleRotation();
     }
@@ -23,7 +27,8 @@ public class PlayerController : MonoBehaviour {
     private Vector3 _input;
     private Rigidbody _rb;
 
-    private void HandleMovement() {
+    private void HandleMovement()
+    {
         _rb.velocity += _input.normalized * (_acceleration * Time.deltaTime);
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxVelocity);
     }
@@ -36,10 +41,12 @@ public class PlayerController : MonoBehaviour {
     private Plane _groundPlane = new(Vector3.up, Vector3.zero);
     private Camera _cam;
 
-    private void HandleRotation() {
+    private void HandleRotation()
+    {
         var ray = _cam.ScreenPointToRay(Input.mousePosition);
 
-        if (_groundPlane.Raycast(ray, out var enter)) {
+        if (_groundPlane.Raycast(ray, out var enter))
+        {
             var hitPoint = ray.GetPoint(enter);
 
             var dir = hitPoint - transform.position;
