@@ -24,7 +24,7 @@ public class PlayerShooting : NetworkBehaviour
 
     private void Update()
     {
-        if (!IsOwner) return;
+        if (!IsOwner && !SingleModeManager.Instance.isPlaying) return;
 
         if (Input.GetMouseButton(0) && _lastFired + _cooldown < Time.time)
         {
