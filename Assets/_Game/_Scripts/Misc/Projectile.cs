@@ -9,15 +9,17 @@ public class Projectile : MonoBehaviour
     private Vector3 _dir;
 
     private Rigidbody rb;
+    public PlayerShooting playerShooting;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(Vector3 dir)
+    public void Init(Vector3 dir, PlayerShooting pShooting)
     {
         rb.AddForce(dir);
+        this.playerShooting = pShooting;
         Invoke(nameof(DestroyBall), 3);
     }
 

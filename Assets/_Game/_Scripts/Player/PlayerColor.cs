@@ -14,8 +14,6 @@ public class PlayerColor : NetworkBehaviour {
     [SerializeField] private MeshRenderer _renderer;
 
     private void Awake() {
-        // Subscribing to a change event. This is how the owner will change its color.
-        // Could also be used for future color changes
         _netColor.OnValueChanged += OnValueChanged;
     }
 
@@ -28,8 +26,6 @@ public class PlayerColor : NetworkBehaviour {
     }
 
     public override void OnNetworkSpawn() {
-        // Take note, RPCs are queued up to run.
-        // If we tried to immediately set our color locally after calling this RPC it wouldn't have propagated
         if (IsOwner) {
             _index = (int)OwnerClientId;
             CommitNetworkColorServerRpc(GetNextColor());

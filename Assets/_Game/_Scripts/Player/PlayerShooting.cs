@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -12,6 +13,13 @@ public class PlayerShooting : NetworkBehaviour
 
     private float _lastFired = float.MinValue;
     private bool _fired;
+
+    private float initialCoolDown;
+
+    private void Awake()
+    {
+        initialCoolDown = _cooldown;
+    }
 
     private void Update()
     {
@@ -44,7 +52,7 @@ public class PlayerShooting : NetworkBehaviour
     private void ExecuteShoot(Vector3 dir)
     {
         var projectile = Instantiate(_projectile, _spawner.position, Quaternion.identity);
-        projectile.Init(dir * _projectileSpeed);
+        projectile.Init(dir * _projectileSpeed, this);
         AudioSource.PlayClipAtPoint(_spawnClip, transform.position);
     }
 
@@ -61,5 +69,18 @@ public class PlayerShooting : NetworkBehaviour
         _fired = true;
         yield return new WaitForSeconds(0.2f);
         _fired = false;
+    }
+
+    public void ReduceCoolDown(float scale = 2)
+    {
+        Debug.Log("Reduce cool down");
+        this._cooldown /= scale;
+        Invoke(nameof(RestoreCoolDown), 5);
+    }
+
+    private void RestoreCoolDown()
+    {
+        Debug.Log("Restore cool down");
+        this._cooldown = initialCoolDown;
     }
 }
