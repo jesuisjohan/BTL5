@@ -845,6 +845,10 @@ MonoBehaviour:
   bossPrefab: {fileID: 97805024486415111, guid: d259b617765ee8242b6fa04f125c90bd, type: 3}
   playerSpawner: {fileID: 767283623}
   bossSpawner: {fileID: 2005443940}
+  upBoundary: {fileID: 1488984603}
+  downBoundary: {fileID: 2120717343}
+  leftBoundary: {fileID: 945083241}
+  rightBoundary: {fileID: 688231799}
 --- !u!4 &1076043368
 Transform:
   m_ObjectHideFlags: 0
