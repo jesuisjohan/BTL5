@@ -26,6 +26,24 @@ public class PlayerShooting : NetworkBehaviour
     {
         if (!IsOwner && !SingleModeManager.Instance.isPlaying) return;
 
+        if (GetComponent<Boss>())
+        {
+            bool shouldFire = true;
+
+            if (shouldFire && _lastFired + _cooldown < Time.time)
+            {
+                _lastFired = Time.time;
+                var dir = transform.forward;
+
+                RequestFireServerRpc(dir);
+
+                ExecuteShoot(dir);
+                StartCoroutine(ToggleLagIndicator());
+            }
+            
+            return;
+        }
+        
         if (Input.GetMouseButton(0) && _lastFired + _cooldown < Time.time)
         {
             _lastFired = Time.time;
