@@ -1,14 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-/// <summary>
-/// An example network serializer with both server and owner authority.
-/// Love Tarodev
-/// </summary>
 public class PlayerTransform : NetworkBehaviour {
-    /// <summary>
-    /// A toggle to test the difference between owner and server auth.
-    /// </summary>
     [SerializeField] private bool _serverAuth;
     [SerializeField] private float _cheapInterpolationTime = 0.1f;
 
@@ -58,7 +51,6 @@ public class PlayerTransform : NetworkBehaviour {
     private float _rotVelY;
 
     private void ConsumeState() {
-        // Here you'll find the cheapest, dirtiest interpolation you'll ever come across. Please do better in your game
         _rb.MovePosition(Vector3.SmoothDamp(_rb.position, _playerState.Value.Position, ref _posVel, _cheapInterpolationTime));
 
         transform.rotation = Quaternion.Euler(
