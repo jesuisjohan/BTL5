@@ -1,9 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
 
-/// <summary>
-/// Just a crappy character controller for the video
-/// </summary>
 public class PlayerController : MonoBehaviour {
     private void Awake() {
         _rb = GetComponent<Rigidbody>();
