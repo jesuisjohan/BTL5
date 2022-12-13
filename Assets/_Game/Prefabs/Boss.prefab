@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2718098530123487362}
   - component: {fileID: 1361617076964993648}
   - component: {fileID: 332996532800558967}
+  - component: {fileID: 2559975470786076232}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -146,6 +147,18 @@ MonoBehaviour:
   _spotDistance: 0.5
   _spotFadeTime: 1
   _groundOffset: 0.01
+--- !u!114 &2559975470786076232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97805024486415106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14631552cd7c864f970e2f71b387e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &588694765373002116
 GameObject:
   m_ObjectHideFlags: 0

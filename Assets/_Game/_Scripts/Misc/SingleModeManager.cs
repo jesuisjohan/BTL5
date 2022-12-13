@@ -33,6 +33,8 @@ public class SingleModeManager : MonoBehaviour
         var playerSpawnerPosition = playerSpawner.position;
         var spawnPosition = new Vector3(playerSpawnerPosition.x, playerPrefab.position.y, playerSpawnerPosition.z);
         player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+
+        player.GetComponent<PlayerTransform>().OnNetworkSpawn();
     }
 
     private void CreateBoss()
@@ -40,5 +42,7 @@ public class SingleModeManager : MonoBehaviour
         var bossSpawnerPosition = bossSpawner.position;
         var spawnPosition = new Vector3(bossSpawnerPosition.x, bossPrefab.position.y, bossSpawnerPosition.z);
         boss = Instantiate(bossPrefab, spawnPosition, Quaternion.identity);
+
+        boss.GetComponent<PlayerTransform>().OnNetworkSpawn();
     }
 }

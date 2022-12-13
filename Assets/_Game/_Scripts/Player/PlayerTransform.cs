@@ -14,12 +14,32 @@ public class PlayerTransform : NetworkBehaviour
         _rb = GetComponent<Rigidbody>();
 
         var permission = _serverAuth ? NetworkVariableWritePermission.Server : NetworkVariableWritePermission.Owner;
+
         _playerState = new NetworkVariable<PlayerNetworkState>(writePerm: permission);
     }
 
     public override void OnNetworkSpawn()
     {
-        if (IsOwner) return;
+        if (SingleModeManager.Instance.isPlaying)
+        {
+            var permission = _serverAuth ? NetworkVariableWritePermission.Server : NetworkVariableWritePermission.Owner;
+            var state = new PlayerNetworkState();
+            if (GetComponent<Boss>())
+            {
+                Debug.Log("Is boss");
+                state.Position = SingleModeManager.Instance.bossSpawner.position;
+                _playerState = new NetworkVariable<PlayerNetworkState>(state, writePerm: permission);
+            }
+            else
+            {
+                Debug.Log("Is Player");
+                state.Position = SingleModeManager.Instance.playerSpawner.position;
+                _playerState = new NetworkVariable<PlayerNetworkState>(state, writePerm: permission);
+            }
+        }
+
+        if (IsOwner || !GetComponent<Boss>()) return;
+        Debug.Log("Destroy Controller");
         Destroy(transform.GetComponent<PlayerController>());
     }
 
