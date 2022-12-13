@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerShooting : NetworkBehaviour
 {
@@ -75,6 +76,9 @@ public class PlayerShooting : NetworkBehaviour
     {
         Debug.Log("Reduce cool down");
         this._cooldown /= scale;
+
+        transform.DOScale(1.2f, 0.5f).SetEase(Ease.InOutQuad);
+        
         Invoke(nameof(RestoreCoolDown), 5);
     }
 
@@ -82,5 +86,6 @@ public class PlayerShooting : NetworkBehaviour
     {
         Debug.Log("Restore cool down");
         this._cooldown = initialCoolDown;
+        transform.DOScale(1, 0.5f).SetEase(Ease.OutBack);
     }
 }
