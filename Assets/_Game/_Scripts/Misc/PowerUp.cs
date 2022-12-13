@@ -14,7 +14,7 @@ public class PowerUp : MonoBehaviour
         Debug.Log("Init PowerUp");
         transform.localScale = new Vector3(0, 0, 0);
         transform.DOScale(1, 0.2f).SetEase(Ease.InOutSine).OnComplete(
-            () => { Invoke(nameof(DestroyPowerUp), lifeSpan); }
+            () => { Invoke(nameof(PlayDisappearingAnimation), lifeSpan); }
         );
     }
 

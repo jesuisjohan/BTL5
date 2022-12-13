@@ -77,7 +77,7 @@ public class PlayerShooting : NetworkBehaviour
         Debug.Log("Reduce cool down");
         this._cooldown /= scale;
 
-        transform.DOScale(1.2f, 0.5f).SetEase(Ease.InOutQuad);
+        transform.DOScale(1.5f, 0.5f).SetEase(Ease.InOutQuad);
         
         Invoke(nameof(RestoreCoolDown), 5);
     }
