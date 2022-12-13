@@ -45,13 +45,21 @@ public class PlayerTransform : NetworkBehaviour
 
     private void Update()
     {
-        if (IsOwner)
+        if (SingleModeManager.Instance.isPlaying)
         {
             TransmitState();
+            ConsumeState();
         }
         else
         {
-            ConsumeState();
+            if (IsOwner)
+            {
+                TransmitState();
+            }
+            else
+            {
+                ConsumeState();
+            }
         }
     }
 
