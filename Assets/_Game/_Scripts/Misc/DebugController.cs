@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class DebugController : MonoBehaviour
 {
-    private bool showConsole;
+    private bool showConsole = true;
     private string input;
 
     public static DebugCommand PSYCHO_MODE;
     public static DebugCommand STOP_ENEMY;
 
     public List<object> commands;
-    
+
     private void Awake()
     {
         PSYCHO_MODE = new DebugCommand("psycho_mode",
@@ -57,13 +57,15 @@ public class DebugController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Slash))
-        {
-            showConsole = !showConsole;
-        }
+        // if (Input.GetKeyDown(KeyCode.Slash))
+        // {
+        //     showConsole = !showConsole;
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Backslash))
         {
+            Debug.Log("Enter");
+
             OnReturn();
         }
     }
@@ -80,7 +82,6 @@ public class DebugController : MonoBehaviour
 
     public void OnReturn()
     {
-        Debug.Log("Enter");
         if (showConsole)
         {
             HandleInput();
