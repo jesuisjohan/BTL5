@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DebugController : MonoBehaviour
 {
-    private bool showConsole = true;
+    private bool showConsole;
     private string input;
 
     public static DebugCommand PSYCHO_MODE;
@@ -20,6 +20,7 @@ public class DebugController : MonoBehaviour
             "psycho_mode",
             () =>
             {
+                Debug.Log("psycho mode");
                 var players = FindObjectsOfType<PlayerShooting>();
 
                 foreach (var p in players)
@@ -34,6 +35,7 @@ public class DebugController : MonoBehaviour
             "stop_enemy",
             () =>
             {
+                Debug.Log("stop enemy");
                 if (SingleModeManager.Instance.isPlaying)
                 {
                     var boss = SingleModeManager.Instance.boss;
@@ -57,10 +59,10 @@ public class DebugController : MonoBehaviour
 
     void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Slash))
-        // {
-        //     showConsole = !showConsole;
-        // }
+        if (Input.GetKeyDown(KeyCode.Slash))
+        {
+            showConsole = !showConsole;
+        }
 
         if (Input.GetKeyDown(KeyCode.Backslash))
         {
@@ -91,15 +93,32 @@ public class DebugController : MonoBehaviour
 
     private void HandleInput()
     {
-        for (int i = 0; i < commands.Count; i++)
+        Debug.Log("Command" + input);
+
+        if (input == STOP_ENEMY._commandId)
         {
-            var commandBase = commands[i] as DebugCommandBase;
-            if (input.Contains(commandBase._commandId))
+            // STOP_ENEMY.Invoke();
+            
+            Debug.Log("stop enemy");
+            if (SingleModeManager.Instance.isPlaying)
             {
-                if (commands[i] as DebugCommand != null)
-                {
-                    ((commands[i] as DebugCommand)).Invoke();
-                }
+                var boss = SingleModeManager.Instance.boss;
+                var bossController = boss.GetComponent<BossController>();
+                var bossShooting = boss.GetComponent<PlayerShooting>();
+
+                bossController.IsMoving = false;
+            }
+        }
+
+        else if (input == PSYCHO_MODE._commandId)
+        {
+            Debug.Log("psycho mode");
+            var players = FindObjectsOfType<PlayerShooting>();
+
+            foreach (var p in players)
+            {
+                if (!p.IsOwner && !SingleModeManager.Instance.isPlaying) continue;
+                p.ReduceCoolDown(10000);
             }
         }
     }
